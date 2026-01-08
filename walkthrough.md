@@ -11,7 +11,10 @@ We have successfully implemented the solution for the C1M3 Assignment, integrati
 
 ### 2. Code Implementation (`C1M3_Assignment.py`)
 - **Client Initialization**: Configured `OpenAI` client to use Google's OpenAI-compatible endpoint (`https://generativelanguage.googleapis.com/v1beta/openai/`) with `GOOGLE_API_KEY`.
-- **Model Selection**: Updated all function calls to use `gemini-2.0-flash-exp`.
+- **Model Selection**: 
+    - Updated function signatures to default to `gemini-2.0-flash-exp` to ensure compatibility with the Google endpoint.
+    - Refactored functions to explicitly use the `model` argument, allowing flexibility if the client backend changes.
+    - Note: The original assignment intended `gpt-4o`, but `gemini-2.0-flash-exp` is used here for the Google setup.
 - **Tool Integration**:
     - Replaced `tavily_search_tool` with `web_search_tool` (powered by DuckDuckGo) in `research_tools.py` and `C1M3_Assignment.py`.
     - Implemented `generate_research_report_with_tools` to handle tool calling loop.
