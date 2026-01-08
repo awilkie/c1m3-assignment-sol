@@ -182,7 +182,7 @@ TOOL_MAPPING = {
 
 
 # GRADED FUNCTION: generate_research_report_with_tools
-def generate_research_report_with_tools(prompt: str, model: str = "gpt-4o") -> str:
+def generate_research_report_with_tools(prompt: str, model: str = "gemini-2.0-flash-exp") -> str:
     """
     Generates a research report using OpenAI's tool-calling with arXiv and web tools.
 
@@ -224,7 +224,7 @@ def generate_research_report_with_tools(prompt: str, model: str = "gpt-4o") -> s
         # Chat with the LLM via the client and set the correct arguments. Hint: Their names match names of variables already defined.
         # Make sure to let the LLM choose tools automatically. Hint: Look at the docs provided earlier!
         response = CLIENT.chat.completions.create( 
-            model="gemini-2.0-flash-exp",
+            model=model,
             messages=messages,
             tools=tools,
             tool_choice="auto",
@@ -314,7 +314,7 @@ unittests.test_generate_research_report_with_tools(generate_research_report_with
 
 
 # GRADED FUNCTION: reflection_and_rewrite
-def reflection_and_rewrite(report, model: str = "gpt-4o-mini", temperature: float = 0.3) -> dict:
+def reflection_and_rewrite(report, model: str = "gemini-2.0-flash-exp", temperature: float = 0.3) -> dict:
     """
     Generates a structured reflection AND a revised research report.
     Accepts raw text OR the messages list returned by generate_research_report_with_tools.
@@ -348,7 +348,7 @@ def reflection_and_rewrite(report, model: str = "gpt-4o-mini", temperature: floa
     # Get a response from the LLM
     response = CLIENT.chat.completions.create( 
         # Pass in the model
-        model="gemini-2.0-flash-exp",
+        model=model,
         messages=[ 
             # System prompt is already defined
             {"role": "system", "content": "You are an academic reviewer and editor."},
@@ -423,7 +423,7 @@ unittests.test_reflection_and_rewrite(reflection_and_rewrite)
 
 
 # GRADED FUNCTION: convert_report_to_html
-def convert_report_to_html(report, model: str = "gpt-4o", temperature: float = 0.5) -> str:
+def convert_report_to_html(report, model: str = "gemini-2.0-flash-exp", temperature: float = 0.5) -> str:
     """
     Converts a plaintext research report into a styled HTML page using OpenAI.
     Accepts raw text OR the messages list from the tool-calling step.
@@ -443,7 +443,7 @@ def convert_report_to_html(report, model: str = "gpt-4o", temperature: float = 0
     # Call the LLM by interacting with the CLIENT. 
     # Remember to set the correct values for the model, messages (system and user prompts) and temperature
     response = CLIENT.chat.completions.create(
-        model="gemini-2.0-flash-exp",
+        model=model,
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt}
